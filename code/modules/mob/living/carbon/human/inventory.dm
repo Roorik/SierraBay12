@@ -23,6 +23,10 @@ This saves us from having to call add_fingerprint() any time something is put in
 				update_inv_r_hand(0)
 			// [SIERRA-ADD] - SSINPUT
 		else
+			if(H.s_active && istype(H.s_active, /obj/item/storage))
+				var/obj/item/storage/S = H.s_active
+				if(S.can_be_inserted(I, null, 1) && S.handle_item_insertion(I))
+					return
 			// Try to place it in any item that can store stuff, on the mob.
 			for(var/obj/item/storage/S in src.contents)
 				if(S.can_be_inserted(I, null, 1) && S.handle_item_insertion(I))
